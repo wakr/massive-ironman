@@ -1,4 +1,4 @@
-Aihe
+# Aihe
 
 Työstettäväksi aiheeksi olen valinnut niin sanotun "viivaseuraajan", jonka tarkoitus on seurata mustaa viivaa. Musta viiva tehdään mustan teipin avulla ja se toimii robotin "ratana", jota pitkin robottini kulkee mahdollisimman nopeasti esimerkiksi pöydällä. Työni tavoitteeksi tuleekin minun luoda tiukkoja mutkia ja mahdollisesti jopa sykliä pitkin menevä robotti, joka olisi kuitenkin mahdollisimman nopea. (Jos/kun aihe on yleinen muitten keskuudessa, olisi tästä kiva järjestää jotain kisoja *vink*)
 
