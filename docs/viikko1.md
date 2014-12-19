@@ -1,4 +1,4 @@
- # 1. Viikko
+# 1. Viikko
 
 Viikko on mennyt tutustumisessa kehitysympäristöön ja Lego Mindstorms-robottiin. LejOS toimii ja vaikka aluksi oli ongelmia sen saamisessa kuntoon, mutta kaiken ratkaisi VirtualBox. Robotin kasaamisessa ei ollut ongelmia, koska olin jo suunnitellut etukäteen mitä aion tehdä, mutta "viivan seuraaja"- robottini takaosa koki ison muutoksen, koska huomasin, ettei robottini pysty kääntymään yhtään, jos pyöriä on 3. 2 pyörää sopii siis tarkoitukseeni täydellisesti valosensorin kanssa.
 
