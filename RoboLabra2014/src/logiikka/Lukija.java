@@ -14,11 +14,13 @@ public class Lukija {
 		
 	}
 	
+	
 	public void lueRuudulle(){
 		LCD.drawString("Valon arvo: " + sensori.getNormalizedLightValue(), 0, 1);
 	}
 	
 	public int getLuettu(){
 		return sensori.getNormalizedLightValue();
+	
 	}
 }

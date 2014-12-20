@@ -2,6 +2,7 @@ package logiikka;
 
 import lejos.nxt.*;
 import lejos.robotics.RegulatedMotorListener;
+import lejos.robotics.navigation.DifferentialPilot;
 import logiikka.moottori.OikeaMoottori;
 import logiikka.moottori.TakaMoottori;
 import logiikka.moottori.VasenMoottori;
@@ -20,24 +21,21 @@ public class Robo {
 		vasen = new VasenMoottori();
 		oikea = new OikeaMoottori();
 		taka = new TakaMoottori();
-		pilotti = new Pilotti(vasen, oikea);
+		pilotti = new Pilotti(vasen, oikea,taka);
 	}
 
 	public void kaynnista() {
 		
-			while(!Button.ENTER.isPressed()){
-				
-				pilotti.liikuta();
-				
-				if(lukija.getLuettu() < 300){
-					pilotti.pysaytaMolemmat();
-					break;
-				}
-
-				
-			}
+			haeMaxMinLukemat();
 			
 		
+	}
+
+	private void haeMaxMinLukemat() {
+		pilotti.asetaVoimaOikea(25);
+		pilotti.asetaVoimaVasen(25);
+		
+		pilotti.etene(135); // 135 astettta
 	}
 	
 	

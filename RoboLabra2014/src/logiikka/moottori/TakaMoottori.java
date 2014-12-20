@@ -13,11 +13,13 @@ public class TakaMoottori implements Moottori{
 	
 	public TakaMoottori() {
 		moottori = Motor.C;
-		m = new NXTMotor(MotorPort.C);
+		m = new NXTMotor(MotorPort.C, MotorPort.STOP);
+		m.setPower(100);
+		m.stop();
 	}
 	
 	@Override
-	public void liiku() {
+	public void liikuEteen() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -36,6 +38,24 @@ public class TakaMoottori implements Moottori{
 	@Override
 	public void pysayta() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void asetaVoima(int maara) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getTacho() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void liikuTaakse() {
+		m.forward();
 		
 	}
 
