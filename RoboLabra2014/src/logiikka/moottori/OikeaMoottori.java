@@ -13,8 +13,8 @@ public class OikeaMoottori implements Moottori{
 	private NXTMotor m;
 	
 	public OikeaMoottori() {
-		moottori = Motor.B;
-		m = new NXTMotor(MotorPort.B,MotorPort.STOP);
+		moottori = Motor.A;
+		m = new NXTMotor(MotorPort.A,MotorPort.STOP);
 		m.setPower(100);
 		m.stop();
 		
@@ -35,7 +35,7 @@ public class OikeaMoottori implements Moottori{
 
 	@Override
 	public NXTRegulatedMotor getMotor() {
-		return Motor.B;
+		return moottori;
 	}
 
 	@Override
@@ -58,6 +58,12 @@ public class OikeaMoottori implements Moottori{
 	@Override
 	public void liikuTaakse() {
 		m.forward();
+		
+	}
+
+	@Override
+	public void resetTacho() {
+		m.resetTachoCount();
 		
 	}
 

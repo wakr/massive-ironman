@@ -59,4 +59,10 @@ public class TakaMoottori implements Moottori{
 		
 	}
 
+	@Override
+	public void resetTacho() {
+		m.resetTachoCount();
+		
+	}
+
 }

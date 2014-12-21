@@ -9,5 +9,6 @@ public interface Moottori{
 	public void pysayta();
 	public void asetaVoima(int maara);
 	public int getTacho();
+	public void resetTacho();
 	public NXTRegulatedMotor getMotor();
 }

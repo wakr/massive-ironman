@@ -12,8 +12,8 @@ public class VasenMoottori implements Moottori{
 	private NXTMotor m;
 	
 	public VasenMoottori() {
-		moottori = Motor.A;
-		m = new NXTMotor(MotorPort.A, MotorPort.STOP);
+		moottori = Motor.B;
+		m = new NXTMotor(MotorPort.B, MotorPort.STOP);
 		m.setPower(100);
 		m.stop();
 	}
@@ -34,7 +34,7 @@ public class VasenMoottori implements Moottori{
 
 	@Override
 	public NXTRegulatedMotor getMotor() {
-		return Motor.A;
+		return moottori;
 	}
 
 	@Override
@@ -57,6 +57,12 @@ public class VasenMoottori implements Moottori{
 	@Override
 	public void liikuTaakse() {
 		m.forward();
+		
+	}
+
+	@Override
+	public void resetTacho() {
+		m.resetTachoCount();
 		
 	}
 

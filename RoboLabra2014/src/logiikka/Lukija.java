@@ -11,7 +11,8 @@ public class Lukija {
 	
 	public Lukija() {
 		sensori = new LightSensor(SensorPort.S1);
-		
+		sensori.setFloodlight(true);
+
 	}
 	
 	
@@ -19,8 +20,19 @@ public class Lukija {
 		LCD.drawString("Valon arvo: " + sensori.getNormalizedLightValue(), 0, 1);
 	}
 	
-	public int getLuettu(){
+	public int getLuettuNormalized(){
 		return sensori.getNormalizedLightValue();
+	}
 	
+	public int getLuettu(){
+		return sensori.readValue();
+	}
+	
+	public void asetaMax(){
+		sensori.calibrateHigh();
+	}
+	
+	public void asetaMin(){
+		sensori.calibrateLow();
 	}
 }
