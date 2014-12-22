@@ -23,7 +23,7 @@ public class OikeaMoottori implements Moottori{
 	
 	@Override
 	public void liikuEteen() {
-		m.backward();
+		m.forward();
 		
 	}
 
@@ -57,7 +57,7 @@ public class OikeaMoottori implements Moottori{
 
 	@Override
 	public void liikuTaakse() {
-		m.forward();
+		m.backward();
 		
 	}
 

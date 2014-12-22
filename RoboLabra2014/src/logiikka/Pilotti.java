@@ -38,6 +38,21 @@ public class Pilotti {
 		oikea.asetaVoima(maara);
 	}
 	
+	public void asetaVoimaJaLiikutaEteenOikea(int teho){
+		asetaVoimaOikea(teho);
+		liikutaOikeaEteen();
+	}
+	
+	public void asetaVoimatJaLiikuta(int teho){
+		asetaVoima(teho);
+		liikutaMolempiaEteen();
+	}
+	
+	public void asetaVoimaJaLiikutaEteenVasen(int teho){
+		asetaVoimaVasen(teho);
+		liikutaVasenEteen();
+	}
+	
 	public void asetaVoimaVasen(int maara){
 		vasen.asetaVoima(maara);
 	}
@@ -70,33 +85,22 @@ public class Pilotti {
 		oikea.pysayta();
 	}
 	
-	public int[] etsiAlkuArvot(int aste, Lukija lukija){
-		//turhaa
-		int arvot[] = new int[]{0, Integer.MAX_VALUE}; //kirkkain & tummin
+	public void etsiAlkuArvot(int aste, Lukija lukija){
 		
-		while(vasen.getTacho() < aste){
-			vasen.liikuTaakse();
-			arvot[0] = Math.max(arvot[0], lukija.getLuettuNormalized());
+		oikea.resetTacho();
+		
+		while(Math.abs(oikea.getTacho()) < aste){
+			oikea.liikuTaakse();
 		}
 		
 		lukija.asetaMax();
 		
-		while(vasen.getTacho() > 0){	
-			vasen.liikuEteen();
-			arvot[1] = Math.min(arvot[1], lukija.getLuettuNormalized());
+		while(Math.abs(oikea.getTacho()) > 0){	
+			oikea.liikuEteen();
 		}
 		
 		lukija.asetaMin();
-		
-		return arvot;
 	}
 
-	public void etsiParasKulma(Lukija lukija, int keskiarvo) {
-		
-		
-		
-		Button.waitForPress();
-		
-	}
 	
 }
