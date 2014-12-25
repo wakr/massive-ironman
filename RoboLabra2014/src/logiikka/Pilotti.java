@@ -38,19 +38,37 @@ public class Pilotti {
 		oikea.asetaVoima(maara);
 	}
 	
-	public void asetaVoimaJaLiikutaEteenOikea(int teho){
-		asetaVoimaOikea(teho);
-		liikutaOikeaEteen();
-	}
-	
 	public void asetaVoimatJaLiikuta(int teho){
-		asetaVoima(teho);
-		liikutaMolempiaEteen();
+		if(teho > 0){
+			asetaVoima(teho);
+			liikutaMolempiaEteen();
+		}
+		else{
+			teho *= -1;
+			liikutaMolempiaTaakse();
+		}
 	}
 	
-	public void asetaVoimaJaLiikutaEteenVasen(int teho){
-		asetaVoimaVasen(teho);
-		liikutaVasenEteen();
+	public void asetaVoimaJaLiikutaEteenOikea(int teho, int tp){
+		if(teho > 0){
+			asetaVoimaOikea(teho);
+			liikutaOikeaEteen();
+		}
+		else{
+			asetaVoimaOikea((teho * -1) + tp);
+			liikutaOikeaTaakse();
+		}
+	}
+	
+	public void asetaVoimaJaLiikutaEteenVasen(int teho, int tp){
+		if(teho < 0){
+			asetaVoimaVasen(teho);
+			liikutaVasenEteen();
+		}
+		else{
+			asetaVoimaVasen((teho * -1) + tp);
+			liikutaVasenTaakse();
+		}
 	}
 	
 	public void asetaVoimaVasen(int maara){

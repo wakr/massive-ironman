@@ -26,7 +26,7 @@ public class Robo {
 	public void kaynnista() {
 			
 			haeMaxMinLukemat();
-			
+			pilotti.asetaVoima(40);
 			
 			while(!Button.ENTER.isPressed()){
 				paataToiminta(lukija.getLuettu());
@@ -35,38 +35,23 @@ public class Robo {
 	}
 
 	
-
-
 	private void paataToiminta(int luettu) {
-		int alaraja = 45, ylaraja = 55, error = 50;
+		int decimalFixer = 100;
+		int error = (100) / 2;
 		int luettuError = luettu - error;
-		int kp = 1;
-		int Tp = 20;
+		int kp = 50; // kaantonopeus / 100 	// 65 & 30 tarkka mutta heiluva
+		int Tp = 30; // nopeus
 		int Turn = kp * luettuError;
+		Turn /= decimalFixer;
+		int vasenPower = Tp - Turn;
+		int oikeaPower = Tp + Turn;
 		
-		int vasenPower = Tp + Turn;
-		int oikeaPower = Tp - Turn;
 		
-		if(oikeaPower > 0){
-			pilotti.asetaVoimaJaLiikutaEteenOikea(oikeaPower);
-		}else{
-			oikeaPower *= -1;
-			MotorPort.A.controlMotor(oikeaPower, 2);
-		}
-		if(vasenPower > 0){
-			pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower);
-		}
-		else{
-			vasenPower *= -1;
-			MotorPort.B.controlMotor(vasenPower, 2);
-		}
+		pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower, Tp);
+		pilotti.asetaVoimaJaLiikutaEteenOikea(oikeaPower, Tp);
 		
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
 	}
 
 	private void haeMaxMinLukemat() {

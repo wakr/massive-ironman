@@ -35,4 +35,12 @@ public class Lukija {
 	public void asetaMin(){
 		sensori.calibrateLow();
 	}
+	
+	public int getMin(){
+		return sensori.getLow();
+	}
+	
+	public int getHigh(){
+		return sensori.getHigh();
+	}
 }
