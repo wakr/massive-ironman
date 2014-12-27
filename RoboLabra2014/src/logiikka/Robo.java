@@ -28,23 +28,34 @@ public class Robo {
 			haeMaxMinLukemat();
 			pilotti.asetaVoima(40);
 			
+			final int decimalFixer = 100;
+			final int offset = (100) / 2;
+			final int ki = 2; // 15 6
+			final int kd = 1128286; // 100000
+			final int kp = 100; // kaantonopeus / 100 	// 65 & 30 tarkka mutta heiluva // 55
+			final int Tp = 30; // nopeus 35
+			int integral = 0;
+			int lastError = 0;
+			int derivate = 0;
+			
 			while(!Button.ENTER.isPressed()){
-				paataToiminta(lukija.getLuettu());
+				int luettu = lukija.getLuettu();
+				int luettuError = luettu - offset;
+				integral = (2/3)*integral + luettuError;
+				derivate = luettuError - lastError;
+				int Turn = kp * luettuError + ki * integral + kd * derivate;
+				Turn /= decimalFixer;
+				int vasenPower = Tp - Turn;
+				int oikeaPower = Tp + Turn;
+				
+				paataToiminta(vasenPower, oikeaPower, Tp);
+				lastError = luettuError;
 			}
 			
 	}
 
 	
-	private void paataToiminta(int luettu) {
-		int decimalFixer = 100;
-		int error = (100) / 2;
-		int luettuError = luettu - error;
-		int kp = 50; // kaantonopeus / 100 	// 65 & 30 tarkka mutta heiluva
-		int Tp = 30; // nopeus
-		int Turn = kp * luettuError;
-		Turn /= decimalFixer;
-		int vasenPower = Tp - Turn;
-		int oikeaPower = Tp + Turn;
+	private void paataToiminta(int vasenPower, int oikeaPower, int Tp) {
 		
 		
 		pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower, Tp);
