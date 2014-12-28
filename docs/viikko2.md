@@ -2,6 +2,8 @@
 
 Paljon on viikossa tapahtunut ohjelmoinnin suhteen ja projektin nojalla. Aloitin tutkimalla ongelmaa "Miten robotti saadaan pysymään viivalla" viikon alussa ja päädyin tulokseen, että mustan viivan keskikohta toimii robotille haluttuna kohtana, koska se on käytännössä ainoa kohta, josta voidaan saada tarpeeksi dataa irti. Periaate keskikohdassa toimii niin, että viivan reuna jakaa alueen karkeasti kolmeen eri valoisuuteen: pienempi kuin 50%, suurempi kuin 50% ja 50%. 
 
+Suurin ongelma jonka viikon aikana kohtasin, oli robotin koko. Tietyn kokoinen robotti ei pysty mitenkään kulkemaan pieniä ja vaikeita mutkia. Toisaalta liian nopea robotti menettää myös tarkkuutta, joten on tasapainoteltava radan vaikeuden, robotin koon ja robotin nopeuden välillä.   
+
 Tästä päästään ensimmäiseen versioon, jonka toteutin eli ns. On-Off -kontrolleriin (tai ns. [Bang-bang control] (http://en.wikipedia.org/wiki/Bang%E2%80%93bang_control)). Se on kaikista helpoin toteuttaa ja hyvä aloitus ongelma-alueen karttamista varten. Toiminta perustuu hyvin yksinkertaiseen ideaan: jos lukija lukee mustaa (eli valoisuus on alle 50%), sammutetaan oikea moottori ja liikutaan oikealle ja vastaavasti jos lukija lukee valoisaa (valoisuus yli 50%) sammutetaan vasen moottori ja liikutaan vasemmalle. Tällä saavutetaan hyvin yksinkertainen, mutta toimiva kontrollerirakenne robotille, joka toimii suorille viivoille erittäin hyvin, mutta käännöksen tuottavat ongelmia, koska robotti antaa liikaa tehoa käännöksille. Tätä voidaan parantaa aluksi kahdella tavalla: 
 
 1. Suoritetaan aina ajon alussa kalibrointi, jossa kirkkain ja tummin kohta saadaan selville
