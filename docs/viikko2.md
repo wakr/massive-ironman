@@ -1,1 +1,17 @@
- 
+# 2. viikko
+
+Paljon on viikossa tapahtunut ohjelmoinnin suhteen ja projektin nojalla. Aloitin tutkimalla ongelmaa "Miten robotti saadaan pysymään viivalla" viikon alussa ja päädyin tulokseen, että mustan viivan keskikohta toimii robotille haluttuna kohtana, koska se on käytännössä ainoa kohta, josta voidaan saada tarpeeksi dataa irti. Periaate keskikohdassa toimii niin, että viivan reuna jakaa alueen karkeasti kolmeen eri valoisuuteen: pienempi kuin 50%, suurempi kuin 50% ja 50%. 
+
+Tästä päästään ensimmäiseen versioon, jonka toteutin eli ns. On-Off -kontrolleriin (tai ns. [Bang-bang control] (http://en.wikipedia.org/wiki/Bang%E2%80%93bang_control)). Se on kaikista helpoin toteuttaa ja hyvä aloitus ongelma-alueen karttamista varten. Toiminta perustuu hyvin yksinkertaiseen ideaan: jos lukija lukee mustaa (eli valoisuus on alle 50%), sammutetaan oikea moottori ja liikutaan oikealle ja vastaavasti jos lukija lukee valoisaa (valoisuus yli 50%) sammutetaan vasen moottori ja liikutaan vasemmalle. Tällä saavutetaan hyvin yksinkertainen, mutta toimiva kontrollerirakenne robotille, joka toimii suorille viivoille erittäin hyvin, mutta käännöksen tuottavat ongelmia, koska robotti antaa liikaa tehoa käännöksille. Tätä voidaan parantaa aluksi kahdella tavalla: 
+
+1. Suoritetaan aina ajon alussa kalibrointi, jossa kirkkain ja tummin kohta saadaan selville
+2. Lähdetään parantamaan kontrolleria lisäämällä tasoja
+
+Tätä ns. 3-vaiheista On-Off -kontrolleria lähdin rakentamaan. Sen toimintaperiaate on käytännössä vain laajennettu kaksivaiheinen On-Off-Controller eli muuten toiminta pysyy samana, mutta jos lukema on jonkun kahden raja-arvon välissä esimerkiksi 45% ja 55%, niin robotti kulkee suoraan. Tällä saavutettiin nopeutta tietyissä testi-ajoissa esimerkiksi ovaalin muotoisilla radoilla. Tästä tavasta kuitenkin löytyi hyvin nopeasti sama ongelma, kuin ensimmäisestä toteutuksesta: liian tiukat käännökset tuottivat ongelmia, koska käännökset ja nopeuden vaihtelut olivat liian rajuja edelleen. 
+
+Aloin etsimään tietoa aivan uudesta lähestymisestä ongelmaa kohtaan ja löysin [PID kontrollerin] (http://en.wikipedia.org/wiki/PID_controller). Se on kontrolleri, jossa pääpainona ovat verrannollisuus, integraali ja derivaatta. PID kontrolloi moottoreita aina sen verran, kun on tarve tiettynä hetkenä, eli kääntökulma tapahtuu aina lukeman mukaan, josta tulee kontrollerin verrannollisuus. Integraali ja derivaatta tekevät pientä virheen korjausta ja ennustamista. Koko lukualue on nyt myös muutettu niin, että 0 on spektrin keskellä, -50 vasen ja +50 oikea. Näin on luotu kontrolleri, joka mittaa pikemminkin virheenastetta ja yrittää korjata sitä oikeaan suuntaan. KI, KD ja KP ovat tärkeitä muuttumattomia arvoja, joilla robotin virheenkorjausta säädetään; voidaan laittaa nopeutta jolloin tarkkuus kärsii tai toisin päin. Tässä taulukko, jota itse käytin oman robottini säätämiseen [Ziegler-Nicholaksen metodi] 
+(http://4.bp.blogspot.com/-6wNzTUebXFs/USH1_PZOUjI/AAAAAAAAAzU/__-uezlkoUA/s400/ZEIGLER.png) ja [tässä] (https://drive.google.com/file/d/0B1KlaaVt92cvNE9Ed29wbVBYNmc/view?pli=1) video robottini nykyisestä toiminnasta tiukoissa mutkissa.
+
+Lopputulokseen olen melko tyytyväinen jo nyt ja robottini toiminnallisuus alkaa muodostua. Ensi viikoksi jää vielä robotin kulkemisen tasausta PID-kontrollerin avulla (videolla näkyvvää ns. overshootingia eli heilumista) ja mieleeni viikolla tullut extra: objektin väistö. Tämä objektin väistäminen tapahtuisi niin, että reitillä on jokin esine, jonka robotti osaisi etäisyys-sensorin avulla väistää. 
+
+
