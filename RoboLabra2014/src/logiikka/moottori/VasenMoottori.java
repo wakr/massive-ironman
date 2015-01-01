@@ -6,6 +6,8 @@ import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
 import logiikka.Moottori;
 
+	// yhdistä moottorit?
+
 public class VasenMoottori implements Moottori{
 
 	private NXTRegulatedMotor moottori;

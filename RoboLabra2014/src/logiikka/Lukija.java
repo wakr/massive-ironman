@@ -8,39 +8,39 @@ import lejos.nxt.SensorPort;
 
 public class Lukija {
 	private LightSensor sensori;
-	
+
 	public Lukija() {
 		sensori = new LightSensor(SensorPort.S1);
 		sensori.setFloodlight(true);
 
 	}
-	
-	
-	public void lueRuudulle(){
-		LCD.drawString("Valon arvo: " + sensori.getNormalizedLightValue(), 0, 1);
+
+	public void lueRuudulle() {
+		LCD.drawString("Valon arvo: " + sensori.getNormalizedLightValue(),
+						0, 1);
 	}
-	
-	public int getLuettuNormalized(){
+
+	public int getLuettuNormalized() {
 		return sensori.getNormalizedLightValue();
 	}
-	
-	public int getLuettu(){
+
+	public int getLuettu() {
 		return sensori.readValue();
 	}
-	
-	public void asetaMax(){
+
+	public void asetaMax() {
 		sensori.calibrateHigh();
 	}
-	
-	public void asetaMin(){
+
+	public void asetaMin() {
 		sensori.calibrateLow();
 	}
-	
-	public int getMin(){
+
+	public int getMin() {
 		return sensori.getLow();
 	}
-	
-	public int getHigh(){
+
+	public int getHigh() {
 		return sensori.getHigh();
 	}
 }

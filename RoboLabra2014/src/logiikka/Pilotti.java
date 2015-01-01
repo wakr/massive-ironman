@@ -7,118 +7,171 @@ import lejos.robotics.navigation.Move;
 import lejos.robotics.navigation.MoveListener;
 import lejos.robotics.navigation.MoveProvider;
 import lejos.robotics.navigation.Move.MoveType;
+import logiikka.moottori.NakijaMoottori;
+import logiikka.moottori.OikeaMoottori;
+import logiikka.moottori.VasenMoottori;
 
 public class Pilotti {
 
-	private Moottori vasen,oikea, taka;
-	
-	public Pilotti(Moottori vasen, Moottori oikea, Moottori taka) {
-		this.vasen = vasen;
-		this.oikea = oikea;
-		this.taka = taka;
+	private Moottori vasen, oikea, nakija;
+
+	public Pilotti() {
+		this.vasen = new VasenMoottori();
+		this.oikea = new OikeaMoottori();
+		this.nakija = new NakijaMoottori();
 	}
-	
-	public void liikutaMolempiaEteen(){
-			vasen.liikuEteen();
-			oikea.liikuEteen();
+
+	public Moottori getVasen() {
+		return vasen;
 	}
-	
-	public void liikutaMolempiaTaakse(){
-			vasen.liikuTaakse();
-			oikea.liikuTaakse();
+
+	public Moottori getOikea() {
+		return oikea;
 	}
-	
-	public void pysaytaMolemmat(){
+
+	public Moottori getNakijanMoottori() {
+		return nakija;
+	}
+
+	public void liikutaMolempiaEteen() {
+		vasen.liikuEteen();
+		oikea.liikuEteen();
+	}
+
+	public void liikutaMolempiaTaakse() {
+		vasen.liikuTaakse();
+		oikea.liikuTaakse();
+	}
+
+	public void pysaytaMolemmat() {
 		vasen.pysayta();
 		oikea.pysayta();
 	}
-	
-	public void asetaVoima(int maara){
+
+	public void asetaVoima(int maara) {
 		vasen.asetaVoima(maara);
 		oikea.asetaVoima(maara);
 	}
-	
-	public void asetaVoimatJaLiikuta(int teho){
-		if(teho > 0){
+
+	public void asetaVoimaVasen(int maara) {
+		vasen.asetaVoima(maara);
+	}
+
+	public void asetaVoimaOikea(int maara) {
+		oikea.asetaVoima(maara);
+	}
+
+	public void asetaVoimatJaLiikuta(int teho) {
+		if (teho > 0) {
 			asetaVoima(teho);
 			liikutaMolempiaEteen();
-		}
-		else{
+		} else {
 			teho *= -1;
 			liikutaMolempiaTaakse();
 		}
 	}
-	
-	public void asetaVoimaJaLiikutaEteenOikea(int teho, int tp){
-		if(teho > 0){
+
+	public void asetaVoimaJaLiikutaEteenOikea(int teho, int tp) {
+		if (teho > 0) {
 			asetaVoimaOikea(teho);
 			liikutaOikeaEteen();
-		}
-		else{
+		} else {
 			asetaVoimaOikea((teho * -1) + tp);
 			liikutaOikeaTaakse();
 		}
 	}
-	
-	public void asetaVoimaJaLiikutaEteenVasen(int teho, int tp){
-		if(teho < 0){
+
+	public void asetaVoimaJaLiikutaEteenVasen(int teho, int tp) {
+		if (teho < 0) {
 			asetaVoimaVasen(teho);
 			liikutaVasenEteen();
-		}
-		else{
+		} else {
 			asetaVoimaVasen((teho * -1) + tp);
 			liikutaVasenTaakse();
 		}
 	}
-	
-	public void asetaVoimaVasen(int maara){
-		vasen.asetaVoima(maara);
-	}
-	
-	public void asetaVoimaOikea(int maara){
-		oikea.asetaVoima(maara);
-	}
-	
-	public void liikutaVasenEteen(){
+
+	public void liikutaVasenEteen() {
 		vasen.liikuEteen();
 	}
-	
-	public void liikutaOikeaEteen(){
+
+	public void liikutaOikeaEteen() {
 		oikea.liikuEteen();
 	}
-	
-	public void liikutaOikeaTaakse(){
+
+	public void liikutaOikeaTaakse() {
 		oikea.liikuTaakse();
 	}
-	
-	public void liikutaVasenTaakse(){
+
+	public void liikutaVasenTaakse() {
 		vasen.liikuTaakse();
 	}
 	
-	public void pysaytaVasen(){
+	public void liikutaVasenTaakse(int aste){
+		vasen.resetTacho();
+		while (Math.abs(vasen.getTacho()) < aste) {
+			vasen.liikuTaakse();
+		}
 		vasen.pysayta();
 	}
-	
-	public void pysaytaOikea(){
+
+	public void kaannaNakijaaOikealle() {
+		nakija.liikuEteen();
+	}
+
+	public void kaannaNakijaaVasemmalle() {
+		nakija.liikuTaakse();
+	}
+
+	public void pysaytaVasen() {
+		vasen.pysayta();
+	}
+
+	public void pysaytaOikea() {
 		oikea.pysayta();
 	}
-	
-	public void etsiAlkuArvot(int aste, Lukija lukija){
-		
+
+	public void etsiAlkuArvot(int aste, Lukija lukija) {
+
 		oikea.resetTacho();
-		
-		while(Math.abs(oikea.getTacho()) < aste){
+
+		while (Math.abs(oikea.getTacho()) < aste) {
 			oikea.liikuTaakse();
 		}
-		
+
 		lukija.asetaMax();
-		
-		while(Math.abs(oikea.getTacho()) > 0){	
+
+		while (Math.abs(oikea.getTacho()) > 0) {
 			oikea.liikuEteen();
 		}
-		
+
 		lukija.asetaMin();
 	}
 
+	public void pysaytaNakija() {
+		nakija.pysayta();
+
+	}
+
+	public void kaannaNakijaaOikealle(int aste) {
+		nakija.resetTacho();
+
+		while (Math.abs(nakija.getTacho()) < aste) {
+			nakija.liikuEteen();
+		}
+		nakija.pysayta();
+
+	}
+
+	public void kaannaNakijaaVasemmalle(int aste) {
+		nakija.resetTacho();
+
+		while (Math.abs(nakija.getTacho()) < aste) {
+			nakija.liikuTaakse();
+		}
+		nakija.pysayta();
+	}
 	
+	
+
 }
