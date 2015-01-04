@@ -3,9 +3,6 @@ package logiikka;
 import utils.Arvo;
 import utils.PID;
 import lejos.nxt.*;
-import logiikka.moottori.OikeaMoottori;
-import logiikka.moottori.NakijaMoottori;
-import logiikka.moottori.VasenMoottori;
 
 public class Robo {
 
@@ -24,12 +21,13 @@ public class Robo {
 	public void kaynnista() {
 
 		haeMaxMinLukemat();
-		// pilotti.asetaVoima(40);
 
 		while (!Button.ENTER.isPressed()) {
 			if (nakija.onkoLoydetty()) {
 				pysaytaRobootti();
-				etsiEsteenReunat();
+				etsiEsteenReunatJaKierra();
+				nakija.setLoydettyFalse();
+				pilotti.asetaVoimatMolempiin(Arvo.TargetPower.getArvo());
 			}
 
 			int luettu = lukija.getLuettu();
@@ -42,32 +40,66 @@ public class Robo {
 
 	}
 
-	private void etsiEsteenReunat() {
-		int etaisyysEsteeseen = nakija.getUltraEtaisyys();
-		int nakijanAlku = pilotti.getNakijanMoottori().getTacho();
-		while(true){
-			if(etaisyysEsteeseen < nakija.getEtaisyys() - 10){
-				pilotti.pysaytaNakija();
+	private void etsiEsteenReunatJaKierra() {
+		// int etaisyysEsteeseen = nakija.getUltraEtaisyys();
+		// int nakijanAlku = pilotti.getNakijanMoottori().getTacho();
+		pilotti.kaannyVasemmalle(90);
+		pilotti.kaannaNakijaaOikealle(90);
+
+		kuljeEteenKunnesTyhjaa();
+
+		pilotti.liikutaMolempiaEteenSynkronoidusti(15); // liikutaan vielä
+		// robotin pituuden
+		// verran
+		pilotti.kaannyOikealle(90);
+
+		kuljeEteenKunnesEtaisyysHaluttu(40);
+		kuljeEteenKunnesTyhjaa(); // kuljetaan esteen ohi
+
+		pilotti.liikutaMolempiaEteenSynkronoidusti(10);
+
+		pilotti.kaannyOikealle(45); // kulma viivaa kohti
+		pilotti.kaannaNakijaaVasemmalle(90); // resetoidaan nakija osoittamaan
+												// suoraan
+
+		kuljeEteenKunnesLukijanArvoAlle(50);
+
+	}
+
+	private void kuljeEteenKunnesLukijanArvoAlle(int minLuettu) {
+		while (true) {
+			if (lukija.getLuettu() <= minLuettu) {
+				pilotti.pysaytaMolemmatSynkronoidusti();
 				break;
 			}
-			pilotti.kaannaNakijaaVasemmalle();
+			pilotti.liikutaMolempiaEteenSynkronoidusti();
 		}
-		nakijanAlku += pilotti.getNakijanMoottori().getTacho();
-		pilotti.kaannaNakijaaVasemmalle(15);
-		nakijanAlku += 15;
-		System.out.println(nakijanAlku);
-		pilotti.asetaVoima(30);
-		pilotti.liikutaVasenTaakse(nakijanAlku*4 + 15);
-		pilotti.kaannaNakijaaOikealle(nakijanAlku);
-		pilotti.kaannaNakijaaOikealle(90);
-		pilotti.liikutaMolempiaEteen();
-		
-		
-		Button.waitForPress();
+
+	}
+
+	private void kuljeEteenKunnesEtaisyysHaluttu(int minEtaisyys) {
+		while (true) {
+			if (nakija.getEtaisyys() <= minEtaisyys) {
+				pilotti.pysaytaMolemmatSynkronoidusti();
+				break;
+			}
+			pilotti.liikutaMolempiaEteenSynkronoidusti();
+		}
+
+	}
+
+	private void kuljeEteenKunnesTyhjaa() {
+		while (true) {
+			if (nakija.getEtaisyys() == 255) {
+				pilotti.pysaytaMolemmatSynkronoidusti();
+				break;
+			}
+			pilotti.liikutaMolempiaEteenSynkronoidusti();
+		}
 	}
 
 	private void pysaytaRobootti() {
-		pilotti.asetaVoima(0);
+		pilotti.asetaVoimatMolempiin(0);
 		pilotti.pysaytaMolemmat();
 
 	}

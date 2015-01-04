@@ -14,20 +14,13 @@ public class NakijaMoottori implements Moottori {
 	public NakijaMoottori() {
 		moottori = Motor.C;
 		m = new NXTMotor(MotorPort.C, MotorPort.STOP);
-		m.setPower(5);
+		m.setPower(10);
 		m.stop();
 	}
 
 	@Override
 	public void liikuEteen() {
 		m.backward();
-
-	}
-
-	@Override
-	public void liikuMonta(int maara) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -49,19 +42,16 @@ public class NakijaMoottori implements Moottori {
 	@Override
 	public int getTacho() {
 		return m.getTachoCount();
-
 	}
 
 	@Override
 	public void liikuTaakse() {
 		m.forward();
-
 	}
 
 	@Override
 	public void resetTacho() {
 		m.resetTachoCount();
-
 	}
 
 }

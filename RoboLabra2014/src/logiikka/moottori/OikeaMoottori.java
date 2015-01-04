@@ -1,6 +1,5 @@
 package logiikka.moottori;
 
-import lejos.nxt.BasicMotor;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
@@ -17,19 +16,11 @@ public class OikeaMoottori implements Moottori {
 		m = new NXTMotor(MotorPort.A, MotorPort.STOP);
 		m.setPower(100);
 		m.stop();
-
 	}
 
 	@Override
 	public void liikuEteen() {
 		m.forward();
-
-	}
-
-	@Override
-	public void liikuMonta(int maara) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -45,25 +36,21 @@ public class OikeaMoottori implements Moottori {
 	@Override
 	public void asetaVoima(int maara) {
 		m.setPower(maara);
-
 	}
 
 	@Override
 	public int getTacho() {
 		return m.getTachoCount();
-
 	}
 
 	@Override
 	public void liikuTaakse() {
 		m.backward();
-
 	}
 
 	@Override
 	public void resetTacho() {
 		m.resetTachoCount();
-
 	}
 
 }

@@ -7,8 +7,6 @@ public interface Moottori {
 
 	public void liikuTaakse();
 
-	public void liikuMonta(int maara);
-
 	public void pysayta();
 
 	public void asetaVoima(int maara);

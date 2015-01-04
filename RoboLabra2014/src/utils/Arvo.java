@@ -1,14 +1,13 @@
 package utils;
 
 /*
- * http://en.wikipedia.org/wiki/PID_controller käyttämät arvot
+ * http://en.wikipedia.org/wiki/PID_controller käyttämät staattiset arvot
  */
 
 public enum Arvo {
 
 	DesiKorjaaja(100), // mahdollistaa tarkan desimaalilaskennan leJOS:ssa
-	OffSet(100 / 2), // valolukijan virhemarginaalin tasoitus välille -50, 0 ,
-						// 50
+	OffSet(100 / 2), // valolukijan virhemarginaalin tasoitus välille -50, 0 , 50
 
 	KonstatIntegraali(12), // integraalin säätämiseen 7 | 12
 	KonstantDerivaatta(500), // ennustaa korjattavaa virhemarginaalia 950 | 500

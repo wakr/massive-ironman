@@ -41,7 +41,6 @@ public class Nakija implements FeatureListener {
 		if (!loydetty) {
 			int range = (int) feature.getRangeReading().getRange();
 			Sound.playTone(1200 - (range * 10), 100);
-			System.out.println("Range:" + range);
 			loydetty = true;
 		}
 	}

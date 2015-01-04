@@ -6,8 +6,6 @@ import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
 import logiikka.Moottori;
 
-	// yhdistä moottorit?
-
 public class VasenMoottori implements Moottori{
 
 	private NXTRegulatedMotor moottori;
@@ -23,15 +21,6 @@ public class VasenMoottori implements Moottori{
 	@Override
 	public void liikuEteen() {
 		m.forward();
-		
-		
-	}
-
-	@Override
-	public void liikuMonta(int maara) {
-		// TODO Auto-generated method stub
-		
-		
 	}
 
 	@Override
@@ -46,9 +35,7 @@ public class VasenMoottori implements Moottori{
 
 	@Override
 	public void asetaVoima(int maara) {
-		m.setPower(maara);
-		
-		
+		m.setPower(maara);	
 	}
 
 	@Override
@@ -59,13 +46,11 @@ public class VasenMoottori implements Moottori{
 	@Override
 	public void liikuTaakse() {
 		m.backward();
-		
 	}
 
 	@Override
 	public void resetTacho() {
 		m.resetTachoCount();
-		
 	}
 
 }

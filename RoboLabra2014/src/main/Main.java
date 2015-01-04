@@ -1,10 +1,16 @@
 package main;
 
+import java.util.Date;
+
 import logiikka.Robo;
 
 /**
- * Example leJOS Project with an ant build file
- *
+ * @author Kristian Wahlroos
+ * 2014-2015 joulukuu
+ * 
+ * Viivanseuraaja PID-kontrollerilla, mikä osaa väistää 
+ * eteen tulleen esteen
+ * 
  */
 public class Main {
 
