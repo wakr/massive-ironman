@@ -1,6 +1,9 @@
-massive-ironman
-===============
+# Robottiohjelmoinnin harjoitustyö
 
-Joulun robokurssin 2014 pohja
+## Viivaseuraaja
 
-Hello GIT
+Kristian Wahlroos
+014417003
+[wakr@cs.helsinki.fi]: wakr@cs.helsinki.fi
+
+

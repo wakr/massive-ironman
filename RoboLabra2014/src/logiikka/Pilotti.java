@@ -2,14 +2,18 @@ package logiikka;
 
 
 import lejos.robotics.navigation.DifferentialPilot;
+import logiikka.moottori.Moottori;
 import logiikka.moottori.NakijaMoottori;
 import logiikka.moottori.OikeaMoottori;
 import logiikka.moottori.VasenMoottori;
+import logiikka.sensori.Lukija;
+
+// sisältää kaiken tarvittavan ohjauksen liikkeitä varten
 
 public class Pilotti {
 
 	private Moottori vasen, oikea, nakija;
-	private DifferentialPilot synkrOhjaaja;
+	private DifferentialPilot synkrOhjaaja; // synkronoitu suoraan menemistä varten
 
 	public Pilotti() {
 		this.vasen = new VasenMoottori();
@@ -165,7 +169,6 @@ public class Pilotti {
 			nakija.liikuEteen();
 		}
 		nakija.pysayta();
-
 	}
 
 	public void kaannaNakijaaVasemmalle(int aste) {

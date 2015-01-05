@@ -4,7 +4,6 @@ import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
-import logiikka.Moottori;
 
 public class VasenMoottori implements Moottori{
 
@@ -13,7 +12,7 @@ public class VasenMoottori implements Moottori{
 	
 	public VasenMoottori() {
 		moottori = Motor.B;
-		m = new NXTMotor(MotorPort.B, MotorPort.STOP);
+		m = new NXTMotor(MotorPort.B, MotorPort.STOP); // aloitetaan pysähtyneenä
 		m.setPower(100);
 		m.stop();
 	}

@@ -4,7 +4,6 @@ import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
-import logiikka.Moottori;
 
 public class OikeaMoottori implements Moottori {
 
@@ -13,7 +12,7 @@ public class OikeaMoottori implements Moottori {
 
 	public OikeaMoottori() {
 		moottori = Motor.A;
-		m = new NXTMotor(MotorPort.A, MotorPort.STOP);
+		m = new NXTMotor(MotorPort.A, MotorPort.STOP); // aloitetaan pysähtyneenä
 		m.setPower(100);
 		m.stop();
 	}

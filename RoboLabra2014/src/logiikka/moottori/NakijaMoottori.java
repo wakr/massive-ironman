@@ -4,7 +4,6 @@ import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
-import logiikka.Moottori;
 
 public class NakijaMoottori implements Moottori {
 
@@ -13,7 +12,7 @@ public class NakijaMoottori implements Moottori {
 
 	public NakijaMoottori() {
 		moottori = Motor.C;
-		m = new NXTMotor(MotorPort.C, MotorPort.STOP);
+		m = new NXTMotor(MotorPort.C, MotorPort.STOP); // aloitetaan pysähtyneenä
 		m.setPower(10);
 		m.stop();
 	}
@@ -36,7 +35,6 @@ public class NakijaMoottori implements Moottori {
 	@Override
 	public void asetaVoima(int maara) {
 		m.setPower(maara);
-
 	}
 
 	@Override

@@ -1,15 +1,15 @@
 package main;
 
-import java.util.Date;
-
+import test.LogiikanTestaaja;
 import logiikka.Robo;
 
 /**
  * @author Kristian Wahlroos
- * 2014-2015 joulukuu
  * 
  * Viivanseuraaja PID-kontrollerilla, mikä osaa väistää 
  * eteen tulleen esteen
+ * 
+ * 15.12.2014 - 12.1.2015 
  * 
  */
 public class Main {
