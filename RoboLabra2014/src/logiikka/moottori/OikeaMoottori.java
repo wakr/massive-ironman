@@ -1,5 +1,6 @@
 package logiikka.moottori;
 
+import util.PysyvaArvo;
 import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
@@ -13,7 +14,7 @@ public class OikeaMoottori implements Moottori {
 	public OikeaMoottori() {
 		moottori = Motor.A;
 		m = new NXTMotor(MotorPort.A, MotorPort.STOP); // aloitetaan pysähtyneenä
-		m.setPower(100);
+		m.setPower(PysyvaArvo.TargetPower.getArvo());
 		m.stop();
 	}
 

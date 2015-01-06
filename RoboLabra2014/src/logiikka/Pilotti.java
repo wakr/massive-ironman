@@ -6,7 +6,7 @@ import logiikka.moottori.Moottori;
 import logiikka.moottori.NakijaMoottori;
 import logiikka.moottori.OikeaMoottori;
 import logiikka.moottori.VasenMoottori;
-import logiikka.sensori.Lukija;
+import logiikka.sensori.ValoSensori;
 
 // sisältää kaiken tarvittavan ohjauksen liikkeitä varten
 
@@ -20,8 +20,9 @@ public class Pilotti {
 		this.oikea = new OikeaMoottori();
 		this.nakija = new NakijaMoottori();
 		this.synkrOhjaaja = new DifferentialPilot(5.5f, 12.5f, vasen.getMotor(), oikea.getMotor(), false);
-		this.synkrOhjaaja.setTravelSpeed(5);
-		this.synkrOhjaaja.setRotateSpeed(50);
+		this.synkrOhjaaja.setTravelSpeed(10);
+		this.synkrOhjaaja.setRotateSpeed(40);
+		
 	}
 
 	public Moottori getVasen() {
@@ -34,6 +35,14 @@ public class Pilotti {
 
 	public Moottori getNakijanMoottori() {
 		return nakija;
+	}
+	
+	public void resetoiTachot(){
+		synkrOhjaaja.reset();
+		vasen.resetTacho();
+		oikea.resetTacho();
+		vasen.getMotor().resetTachoCount();
+		oikea.getMotor().resetTachoCount();
 	}
 
 	public void liikutaMolempiaEteenSynkronoidusti(){
@@ -91,7 +100,8 @@ public class Pilotti {
 			asetaVoimaOikea(teho);
 			liikutaOikeaEteen();
 		} else {
-			asetaVoimaOikea((teho * -1) + tp);
+			//asetaVoimaOikea((teho * -1) + tp);
+			asetaVoimaOikea(teho*-1);
 			liikutaOikeaTaakse();
 		}
 	}
@@ -101,7 +111,8 @@ public class Pilotti {
 			asetaVoimaVasen(teho);
 			liikutaVasenEteen();
 		} else {
-			asetaVoimaVasen((teho * -1) + tp);
+			//asetaVoimaVasen((teho * -1) + tp);
+			asetaVoimaVasen(teho*-1);
 			liikutaVasenTaakse();
 		}
 	}
@@ -192,7 +203,7 @@ public class Pilotti {
 		nakija.pysayta();
 	}
 
-	public void etsiAlkuArvot(int aste, Lukija lukija) {
+	public void etsiAlkuArvot(int aste, ValoSensori lukija) {
 
 		oikea.resetTacho();
 

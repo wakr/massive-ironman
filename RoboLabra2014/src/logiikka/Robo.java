@@ -3,21 +3,21 @@ package logiikka;
 import util.PID;
 import util.PysyvaArvo;
 import lejos.nxt.*;
-import logiikka.sensori.Lukija;
-import logiikka.sensori.Nakija;
+import logiikka.sensori.ValoSensori;
+import logiikka.sensori.UltraSensori;
 
 public class Robo {
 
-	private Lukija lukija;
-	private Nakija nakija;
+	private ValoSensori lukija;
+	private UltraSensori nakija;
 	private Pilotti pilotti;
 	private PID pid; // PID-kontrolleri
 
 	public Robo() {
-		lukija = new Lukija();
+		lukija = new ValoSensori();
 		pilotti = new Pilotti();
 		pid = new PID();
-		nakija = new Nakija();
+		nakija = new UltraSensori();
 	}
 
 	public void kaynnista() {
@@ -27,9 +27,14 @@ public class Robo {
 		while (!Button.ENTER.isPressed()) {
 			if (nakija.onkoLoydetty()) {
 				pysaytaRobootti();
+				pilotti.resetoiTachot();
+				
 				etsiEsteenReunatJaKierra();
+				
 				nakija.setLoydettyFalse();
 				pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
+				pilotti.getVasen().getMotor().suspendRegulation();
+				pilotti.getOikea().getMotor().suspendRegulation();
 			}
 
 			int luettu = lukija.getLuettu();
@@ -43,24 +48,24 @@ public class Robo {
 	}
 
 	private void etsiEsteenReunatJaKierra() {
-		pilotti.kaannyVasemmalle(90);		// kaannytaan sivuttain kohti estettä
-		pilotti.kaannaNakijaaOikealle(90);
+		pilotti.kaannyOikealle(90);		// kaannytaan sivuttain kohti estettä
+		pilotti.kaannaNakijaaVasemmalle(90);
+		
+		kuljeEteenKunnesTyhjaa(40);
 
-		kuljeEteenKunnesTyhjaa();
-
-		pilotti.liikutaMolempiaEteenSynkronoidusti(15); // liikutaan vielä robotin pituuden verran
-		pilotti.kaannyOikealle(90);
+		pilotti.liikutaMolempiaEteenSynkronoidusti(20); // liikutaan vielä robotin pituuden verran
+		pilotti.kaannyVasemmalle(90);
 
 		kuljeEteenKunnesEtaisyysHaluttu(40);
-		kuljeEteenKunnesTyhjaa(); 						// kuljetaan esteen ohi
+		kuljeEteenKunnesTyhjaa(40); 						// kuljetaan esteen ohi
 
-		pilotti.liikutaMolempiaEteenSynkronoidusti(10);
+		pilotti.liikutaMolempiaEteenSynkronoidusti(15);
 
-		pilotti.kaannyOikealle(45); 		 // kaannytaan kohti viivaa
-		pilotti.kaannaNakijaaVasemmalle(90); // resetoidaan nakija osoittamaan suoraan
+		pilotti.kaannyVasemmalle(45); 		 // kaannytaan kohti viivaa
+		pilotti.kaannaNakijaaOikealle(90); // resetoidaan nakija osoittamaan suoraan
 
-		kuljeEteenKunnesLukijanArvoAlle(50);
-
+		kuljeEteenKunnesLukijanArvoAlle(40);
+		
 	}
 
 	private void kuljeEteenKunnesLukijanArvoAlle(int minLuettu) {
@@ -85,9 +90,9 @@ public class Robo {
 
 	}
 
-	private void kuljeEteenKunnesTyhjaa() {
+	private void kuljeEteenKunnesTyhjaa(int raja) {
 		while (true) {
-			if (nakija.getEtaisyys() == 255) {
+			if (nakija.getEtaisyys() >= raja) {
 				pilotti.pysaytaMolemmatSynkronoidusti();
 				break;
 			}
@@ -100,6 +105,7 @@ public class Robo {
 		pilotti.asetaVoimatMolempiin(0);
 		pilotti.pysaytaMolemmat();
 		
+		
 	}
 
 	private void paataToiminta(int vasenPower, int oikeaPower, int Tp) {
@@ -111,8 +117,7 @@ public class Robo {
 
 	private void haeMaxMinLukemat() {
 
-		pilotti.asetaVoimaOikea(30);
-		pilotti.asetaVoimaVasen(30);
+		pilotti.asetaVoimatMolempiin(30);
 		pilotti.etsiAlkuArvot(135, lukija); // 135 astetta
 		pilotti.pysaytaMolemmat();
 

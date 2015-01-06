@@ -9,10 +9,10 @@ public enum PysyvaArvo {
 	DesiKorjaaja(100), // mahdollistaa tarkan desimaalilaskennan leJOS:ssa
 	OffSet(100 / 2), // valolukijan virhemarginaalin tasoitus välille -50, 0 , 50
 
-	KonstatIntegraali(12),    // integraalin säätämiseen 
-	KonstantDerivaatta(500),  // ennustaa korjattavaa virhemarginaalia 
-	KonstantProportional(84), // virheestä kääntymisen kulma 
-	TargetPower(35); 		  // Robotin käyttämän moottorin tehokkuus
+	KonstatIntegraali(1),    // integraalin säätämiseen 12 
+	KonstantDerivaatta(10000),  // ennustaa korjattavaa virhemarginaalia 500 
+	KonstantProportional(190), // virheestä kääntymisen kulma 84
+	TargetPower(90); 		  // Robotin käyttämän moottorin tehokkuus 35 90
 
 	private int arvo;
 

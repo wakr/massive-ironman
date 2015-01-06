@@ -13,7 +13,7 @@ public class NakijaMoottori implements Moottori {
 	public NakijaMoottori() {
 		moottori = Motor.C;
 		m = new NXTMotor(MotorPort.C, MotorPort.STOP); // aloitetaan pysähtyneenä
-		m.setPower(10);
+		m.setPower(25);
 		m.stop();
 	}
 

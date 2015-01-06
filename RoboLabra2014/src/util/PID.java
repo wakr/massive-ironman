@@ -13,7 +13,7 @@ public class PID {
 
 	public int laskeKaantoSuhde(int luettu) {
 		virhe = luettu - PysyvaArvo.OffSet.getArvo(); // tasoitetaan virhelukema
-		integraali = (2 / 3) * integraali + virhe;    // virheensäätö, jossa "2/3" parantaa tarkkuutta
+		integraali = (2/3) * integraali + virhe;      // virheensäätö, jossa (2/3) parantaa tarkkuutta
 		derivaatta = virhe - viimeVirhe; 			  // ennustaminen
 		int Kaanto = PysyvaArvo.KonstantProportional.getArvo() * virhe
 				+ PysyvaArvo.KonstatIntegraali.getArvo() * integraali
