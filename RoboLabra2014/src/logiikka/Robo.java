@@ -26,23 +26,29 @@ public class Robo {
 
 		while (!Button.ENTER.isPressed()) {
 			if (nakija.onkoLoydetty()) {
-				pysaytaRobootti();
-				pilotti.resetoiTachot();
-				
-				etsiEsteenReunatJaKierra();
-				
-				nakija.setLoydettyFalse();
-				pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
-				pilotti.vapautaRegulaatioMolemmista();
+				vaistaEste();
 			}
-
-			int kaannos = pid.laskeKaantoSuhde(lukija.getLuettu());
-			int TP = PysyvaArvo.TargetPower.getArvo();
-			int vasenPower = TP - kaannos, oikeaPower = TP + kaannos;
-			
-			paataToiminta(vasenPower, oikeaPower);
+			seuraaViivaa();
 		}
+	}
 
+	private void seuraaViivaa() {
+		int kaannos = pid.laskeKaantoSuhde(lukija.getLuettu());
+		int TP = PysyvaArvo.TargetPower.getArvo();
+		int vasenPower = TP - kaannos, oikeaPower = TP + kaannos;
+		
+		paataToiminta(vasenPower, oikeaPower);
+	}
+
+	private void vaistaEste() {
+		pysaytaRobootti();
+		pilotti.resetoiTachot();
+		
+		etsiEsteenReunatJaKierra();
+		
+		nakija.setLoydettyFalse();
+		pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
+		pilotti.vapautaRegulaatioMolemmista();
 	}
 
 	private void etsiEsteenReunatJaKierra() {
