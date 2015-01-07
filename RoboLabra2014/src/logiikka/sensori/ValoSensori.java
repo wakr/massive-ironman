@@ -7,8 +7,8 @@ import lejos.nxt.SensorPort;
 public class ValoSensori {
 	private LightSensor valoSensori;
 
-	public ValoSensori() {
-		valoSensori = new LightSensor(SensorPort.S1);
+	public ValoSensori(SensorPort sensoriPortti) {
+		valoSensori = new LightSensor(sensoriPortti);
 		valoSensori.setFloodlight(true); // otetaan lukema keinoteikoisesta valosta
 	}
 

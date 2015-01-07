@@ -14,10 +14,10 @@ public class Robo {
 	private PID pid; // PID-kontrolleri
 
 	public Robo() {
-		lukija = new ValoSensori();
+		lukija = new ValoSensori(SensorPort.S1);
 		pilotti = new Pilotti();
 		pid = new PID();
-		nakija = new UltraSensori();
+		nakija = new UltraSensori(SensorPort.S2);
 	}
 
 	public void kaynnista() {
@@ -33,39 +33,46 @@ public class Robo {
 				
 				nakija.setLoydettyFalse();
 				pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
-				pilotti.getVasen().getMotor().suspendRegulation();
-				pilotti.getOikea().getMotor().suspendRegulation();
+				pilotti.vapautaRegulaatioMolemmista();
 			}
 
-			int luettu = lukija.getLuettu();
-			int kaannos = pid.laskeKaantoSuhde(luettu);
+			int kaannos = pid.laskeKaantoSuhde(lukija.getLuettu());
 			int TP = PysyvaArvo.TargetPower.getArvo();
 			int vasenPower = TP - kaannos, oikeaPower = TP + kaannos;
 			
-			paataToiminta(vasenPower, oikeaPower, TP);
+			paataToiminta(vasenPower, oikeaPower);
 		}
 
 	}
 
 	private void etsiEsteenReunatJaKierra() {
-		pilotti.kaannyOikealle(90);		// kaannytaan sivuttain kohti estettä
-		pilotti.kaannaNakijaaVasemmalle(90);
-		
-		kuljeEteenKunnesTyhjaa(40);
+		kaannyJaKuljeEsteenOhiEdestä();
+		kuljeEsteenOhiSivulta();
+		kaannyJaKuljeKohtiViivaa();
+	}
 
-		pilotti.liikutaMolempiaEteenSynkronoidusti(20); // liikutaan vielä robotin pituuden verran
-		pilotti.kaannyVasemmalle(90);
-
-		kuljeEteenKunnesEtaisyysHaluttu(40);
-		kuljeEteenKunnesTyhjaa(40); 						// kuljetaan esteen ohi
-
-		pilotti.liikutaMolempiaEteenSynkronoidusti(15);
-
+	private void kaannyJaKuljeKohtiViivaa() {
 		pilotti.kaannyVasemmalle(45); 		 // kaannytaan kohti viivaa
 		pilotti.kaannaNakijaaOikealle(90); // resetoidaan nakija osoittamaan suoraan
+		kuljeEteenKunnesLukijanArvoAlle(40); // alle 40 tarkoittaa, että ollaan jo hieman mustalla viivalla
+	}
 
-		kuljeEteenKunnesLukijanArvoAlle(40);
-		
+	private void kuljeEsteenOhiSivulta() {
+		kuljeEteenKunnesEtaisyysHaluttu(40);
+		kuljeEteenKunnesTyhjaa(40); 						// kuljetaan esteen ohi
+		pilotti.liikutaMolempiaEteenSynkronoidusti(15);
+	}
+
+	private void kaannyJaKuljeEsteenOhiEdestä() {
+		kaannaRobottiJaLukijaSivuttainKohtiEstetta();	// kaannytaan sivuttain kohti estettä
+		kuljeEteenKunnesTyhjaa(40);						// tyhjäksi luetaan yli 40 päässä olevat kohteet
+		pilotti.liikutaMolempiaEteenSynkronoidusti(20); // liikutaan vielä robotin pituuden verran
+		pilotti.kaannyVasemmalle(90);
+	}
+
+	private void kaannaRobottiJaLukijaSivuttainKohtiEstetta() {
+		pilotti.kaannyOikealle(90);						
+		pilotti.kaannaNakijaaVasemmalle(90);
 	}
 
 	private void kuljeEteenKunnesLukijanArvoAlle(int minLuettu) {
@@ -104,20 +111,19 @@ public class Robo {
 		
 		pilotti.asetaVoimatMolempiin(0);
 		pilotti.pysaytaMolemmat();
-		
-		
+			
 	}
 
-	private void paataToiminta(int vasenPower, int oikeaPower, int Tp) {
+	private void paataToiminta(int vasenPower, int oikeaPower) {
 		
-		pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower, Tp);
-		pilotti.asetaVoimaJaLiikutaEteenOikea(oikeaPower, Tp);
+		pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower);
+		pilotti.asetaVoimaJaLiikutaEteenOikea(oikeaPower);
 		
 	}
 
 	private void haeMaxMinLukemat() {
 
-		pilotti.asetaVoimatMolempiin(30);
+		pilotti.asetaVoimatMolempiin(30);	// 30 on tarpeeksi hidas, jotta saadaan vakaat tulokset
 		pilotti.etsiAlkuArvot(135, lukija); // 135 astetta
 		pilotti.pysaytaMolemmat();
 

@@ -1,11 +1,11 @@
 package logiikka;
 
-
+import lejos.nxt.Motor;
+import lejos.nxt.MotorPort;
 import lejos.robotics.navigation.DifferentialPilot;
 import logiikka.moottori.Moottori;
 import logiikka.moottori.NakijaMoottori;
-import logiikka.moottori.OikeaMoottori;
-import logiikka.moottori.VasenMoottori;
+import logiikka.moottori.SivuMoottori;
 import logiikka.sensori.ValoSensori;
 
 // sisältää kaiken tarvittavan ohjauksen liikkeitä varten
@@ -16,13 +16,13 @@ public class Pilotti {
 	private DifferentialPilot synkrOhjaaja; // synkronoitu suoraan menemistä varten
 
 	public Pilotti() {
-		this.vasen = new VasenMoottori();
-		this.oikea = new OikeaMoottori();
-		this.nakija = new NakijaMoottori();
-		this.synkrOhjaaja = new DifferentialPilot(5.5f, 12.5f, vasen.getMotor(), oikea.getMotor(), false);
+		this.vasen = new SivuMoottori(Motor.B, MotorPort.B);
+		this.oikea = new SivuMoottori(Motor.A, MotorPort.A);
+		this.nakija = new NakijaMoottori(Motor.C, MotorPort.C);
+		this.synkrOhjaaja = new DifferentialPilot(5.5f, 12.5f, // 5.5cm renkaiden halkaisija, 12.5cm leveys renkaiden välillä
+				vasen.getMotor(), oikea.getMotor(), false);
 		this.synkrOhjaaja.setTravelSpeed(10);
 		this.synkrOhjaaja.setRotateSpeed(40);
-		
 	}
 
 	public Moottori getVasen() {
@@ -36,8 +36,8 @@ public class Pilotti {
 	public Moottori getNakijanMoottori() {
 		return nakija;
 	}
-	
-	public void resetoiTachot(){
+
+	public void resetoiTachot() {
 		synkrOhjaaja.reset();
 		vasen.resetTacho();
 		oikea.resetTacho();
@@ -45,18 +45,23 @@ public class Pilotti {
 		oikea.getMotor().resetTachoCount();
 	}
 
-	public void liikutaMolempiaEteenSynkronoidusti(){
+	public void vapautaRegulaatioMolemmista() {
+		vasen.getMotor().suspendRegulation();
+		oikea.getMotor().suspendRegulation();
+	}
+
+	public void liikutaMolempiaEteenSynkronoidusti() {
 		synkrOhjaaja.forward();
 	}
-	
-	public void liikutaMolempiaEteenSynkronoidusti(int matkaCm){
+
+	public void liikutaMolempiaEteenSynkronoidusti(int matkaCm) {
 		synkrOhjaaja.travel(matkaCm);
 	}
-	
-	public void pysaytaMolemmatSynkronoidusti(){
+
+	public void pysaytaMolemmatSynkronoidusti() {
 		synkrOhjaaja.stop();
 	}
-	
+
 	public void liikutaMolempiaEteen() {
 		vasen.liikuEteen();
 		oikea.liikuEteen();
@@ -70,6 +75,18 @@ public class Pilotti {
 	public void pysaytaMolemmat() {
 		vasen.pysayta();
 		oikea.pysayta();
+	}
+
+	public void pysaytaVasen() {
+		vasen.pysayta();
+	}
+
+	public void pysaytaOikea() {
+		oikea.pysayta();
+	}
+
+	public void pysaytaNakija() {
+		nakija.pysayta();
 	}
 
 	public void asetaVoimatMolempiin(int maara) {
@@ -95,30 +112,32 @@ public class Pilotti {
 		}
 	}
 
-	public void asetaVoimaJaLiikutaEteenOikea(int teho, int tp) {
+	public void asetaVoimaJaLiikutaEteenOikea(int teho) {
 		if (teho > 0) {
 			asetaVoimaOikea(teho);
 			liikutaOikeaEteen();
 		} else {
-			//asetaVoimaOikea((teho * -1) + tp);
-			asetaVoimaOikea(teho*-1);
+			asetaVoimaOikea(teho * -1);
 			liikutaOikeaTaakse();
 		}
 	}
 
-	public void asetaVoimaJaLiikutaEteenVasen(int teho, int tp) {
+	public void asetaVoimaJaLiikutaEteenVasen(int teho) {
 		if (teho < 0) {
 			asetaVoimaVasen(teho);
 			liikutaVasenEteen();
 		} else {
-			//asetaVoimaVasen((teho * -1) + tp);
-			asetaVoimaVasen(teho*-1);
+			asetaVoimaVasen(teho * -1);
 			liikutaVasenTaakse();
 		}
 	}
 
 	public void liikutaVasenEteen() {
 		vasen.liikuEteen();
+	}
+
+	public void liikutaVasenTaakse() {
+		vasen.liikuTaakse();
 	}
 
 	public void liikutaOikeaEteen() {
@@ -129,40 +148,20 @@ public class Pilotti {
 		oikea.liikuTaakse();
 	}
 
-	public void liikutaVasenTaakse() {
-		vasen.liikuTaakse();
-	}
-	
-	public void kaannyOikealle(){
+	public void kaannyOikealle() {
 		synkrOhjaaja.rotateRight();
 	}
-	
-	public void kaannyOikealle(int aste){
+
+	public void kaannyOikealle(int aste) {
 		synkrOhjaaja.rotate(-aste);
 	}
-	
-	public void kaannyVasemmalle(){
+
+	public void kaannyVasemmalle() {
 		synkrOhjaaja.rotateLeft();
 	}
-	
-	public void kaannyVasemmalle(int aste){
+
+	public void kaannyVasemmalle(int aste) {
 		synkrOhjaaja.rotate(aste);
-	}
-	
-	public void liikutaVasenTaakse(int aste){
-		vasen.resetTacho();
-		while (Math.abs(vasen.getTacho()) < aste) {
-			vasen.liikuTaakse();
-		}
-		vasen.pysayta();
-	}
-	
-	public void liikutaVasenEteen(int aste){
-		vasen.resetTacho();
-		while (Math.abs(vasen.getTacho()) < aste) {
-			vasen.liikuEteen();
-		}
-		vasen.pysayta();
 	}
 
 	public void kaannaNakijaaOikealle() {
@@ -171,6 +170,22 @@ public class Pilotti {
 
 	public void kaannaNakijaaVasemmalle() {
 		nakija.liikuTaakse();
+	}
+
+	public void liikutaVasenTaakse(int aste) {
+		vasen.resetTacho();
+		while (Math.abs(vasen.getTacho()) < aste) {
+			vasen.liikuTaakse();
+		}
+		vasen.pysayta();
+	}
+
+	public void liikutaVasenEteen(int aste) {
+		vasen.resetTacho();
+		while (Math.abs(vasen.getTacho()) < aste) {
+			vasen.liikuEteen();
+		}
+		vasen.pysayta();
 	}
 
 	public void kaannaNakijaaOikealle(int aste) {
@@ -191,18 +206,6 @@ public class Pilotti {
 		nakija.pysayta();
 	}
 
-	public void pysaytaVasen() {
-		vasen.pysayta();
-	}
-
-	public void pysaytaOikea() {
-		oikea.pysayta();
-	}
-	
-	public void pysaytaNakija() {
-		nakija.pysayta();
-	}
-
 	public void etsiAlkuArvot(int aste, ValoSensori lukija) {
 
 		oikea.resetTacho();
@@ -219,9 +222,5 @@ public class Pilotti {
 
 		lukija.asetaMin();
 	}
-
-	
-	
-	
 
 }

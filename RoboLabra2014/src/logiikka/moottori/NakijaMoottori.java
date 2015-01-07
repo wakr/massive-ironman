@@ -1,55 +1,54 @@
 package logiikka.moottori;
 
-import lejos.nxt.Motor;
 import lejos.nxt.MotorPort;
 import lejos.nxt.NXTMotor;
 import lejos.nxt.NXTRegulatedMotor;
 
 public class NakijaMoottori implements Moottori {
 
-	private NXTRegulatedMotor moottori;
-	private NXTMotor m;
+	private NXTRegulatedMotor reguloituMoottori;
+	private NXTMotor saadeltavaMoottori;
 
-	public NakijaMoottori() {
-		moottori = Motor.C;
-		m = new NXTMotor(MotorPort.C, MotorPort.STOP); // aloitetaan pysähtyneenä
-		m.setPower(25);
-		m.stop();
+	public NakijaMoottori(NXTRegulatedMotor reguloituMoottori, MotorPort moottorinPortti)  {
+		this.reguloituMoottori = reguloituMoottori;
+		saadeltavaMoottori = new NXTMotor(moottorinPortti, MotorPort.STOP); // aloitetaan pysähtyneenä
+		saadeltavaMoottori.setPower(25);
+		saadeltavaMoottori.stop();
 	}
 
 	@Override
 	public void liikuEteen() {
-		m.backward();
+		saadeltavaMoottori.backward();
 	}
 
 	@Override
 	public NXTRegulatedMotor getMotor() {
-		return moottori;
+		return reguloituMoottori;
 	}
 
 	@Override
 	public void pysayta() {
-		m.stop();
+		saadeltavaMoottori.stop();
 	}
 
 	@Override
 	public void asetaVoima(int maara) {
-		m.setPower(maara);
+		saadeltavaMoottori.setPower(maara);
 	}
 
 	@Override
 	public int getTacho() {
-		return m.getTachoCount();
+		return saadeltavaMoottori.getTachoCount();
 	}
 
 	@Override
 	public void liikuTaakse() {
-		m.forward();
+		saadeltavaMoottori.forward();
 	}
 
 	@Override
 	public void resetTacho() {
-		m.resetTachoCount();
+		saadeltavaMoottori.resetTachoCount();
 	}
 
 }

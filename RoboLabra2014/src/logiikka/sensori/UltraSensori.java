@@ -13,11 +13,11 @@ public class UltraSensori implements FeatureListener {
 	private RangeFeatureDetector etaisyysKuuntelija; // automaattinen listeneri törmäyksiä varten
 	private boolean loydetty;
 
-	public UltraSensori() {
-		this.sensori = new UltrasonicSensor(SensorPort.S2);
+	public UltraSensori(SensorPort sensoriPortti) {
+		this.sensori = new UltrasonicSensor(sensoriPortti);
 		this.etaisyysKuuntelija = new RangeFeatureDetector(sensori, 20, 350); // 20cm etäisyys 350ms viiveellä
 		this.etaisyysKuuntelija.addListener(this);
-		loydetty = false;
+		this.loydetty = false;
 	}
 
 	public void setLoydettyFalse() {

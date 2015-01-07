@@ -12,13 +12,21 @@ public class LogiikanTestaaja {
 		return pid.laskeKaantoSuhde(50) == 0;
 	}
 	
-	public boolean PIDAntaaNollanJosUseampiSama(){
+	public boolean PIDAntaaNollanJosUseampiKeskiarvoLuettu(){
 		PID pid = new PID();
 		pid.laskeKaantoSuhde(50);
-		pid.laskeKaantoSuhde(49);
-		pid.laskeKaantoSuhde(49);
-		return pid.laskeKaantoSuhde(49) == 0;
+		pid.laskeKaantoSuhde(50);
+		return pid.laskeKaantoSuhde(50) == 0;
 	}
 	
+	public boolean korjaaAlleKeskiarvoNegatiivisella(){
+		PID pid = new PID();
+		return pid.laskeKaantoSuhde(49) < 0;
+	}
+	
+	public boolean korjaaYliKeskiarvoPositiivisella(){
+		PID pid = new PID();
+		return pid.laskeKaantoSuhde(51) > 0;
+	}
 	
 }
