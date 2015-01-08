@@ -22,13 +22,13 @@ Robotin rakenne mahdollistaa vakaan, mutta nopean liikkumisen. Vakaa rakenne par
 
 ### Kuvat
 
-![Robotti edestä](https://lh6.googleusercontent.com/dqeAUgI8XFqTLG00TBykzOhrfqEopdX2JgnqEcWNVtJ3fND3puI0sLVqMFIUKONcB16so4GoAcg=w1350-h523)
+![Robotti edestä](/pics/robottiEdestä.jpg)
 
-![Robotti sivusta](https://lh6.googleusercontent.com/gis7PV-TqqqF5m6o9BCGXtCwZm--5on86NXIFD-gwbXJM493LliIoOnJMkF0C9mRRZmx4vkJktA=w1350-h523)
+![Robotti sivusta](/pics/robottiSivusta.jpg)
 
-![Robotti alta](https://lh3.googleusercontent.com/NiV8ioAuP3ziJ2y2eY8NNGtCp2Fa5U4eCTZKnnjUULjwoXy4bJUIfPSZ2e4CDxWjrmTZjpZa7ng=w1350-h523)
+![Robotti alta](/pics/robottiAlta.jpg)
 
-![Robotti takaa](https://lh3.googleusercontent.com/0R7PSvCfmrGax1ue9WN4gHY0dL7bdcuFwCfDhRwZw-KR_Ew40zIX9EnFW1rBBq5tbIbHObFvSrI=w1350-h523)
+![Robotti takaa](/pics/robottiTakaa.jpg)
 
 
 # Koodin rakenne
@@ -60,16 +60,43 @@ Kun ohjelma käynnistetään mainista luoden `Robo.java`:n ilmentymä ja kutsuen
 
 * Viivanseuraaminen tapahtuu niin, että `ValoSensori.java`-luokan ilmentymä antaa ensin luetun valoisuuden väliltä 0 - 100, jossa arvo 0 on täysin musta ja 100 täysin vaalea. Tämä arvo annetaan PID-kontrollerin ilmentymälle, joka suorittaa [PID-operaation](http://en.wikipedia.org/wiki/PID_controller). `PID.java` laskee kuinka kaukana luettu arvo on halutusta 0-arvosta, jolloin lukija on viivan reunassa. PID-kontrolleri myös derivoi ja integroi arvoa `PysyvaArvo.java`:n arvojen avulla, jolloin saadaa tarkka ja säädettävä viivanseuraaja. PID palauttaa laskemansa kääntösuhteen, johon lisataan/vahennetaan moottorien keskiteho. Kun arvot on laskettu kutsutaan `paataToiminta(vasenPower, oikeaPower)`-metodia, joka taas kutsuu pilotin `asetaVoimaJaLiikutaEteen(teho)` kummallekkin puolelle eli oikealle sekä vasemmalle. Näin saadaan siirrettyä tarvittava teho suoraan pyörille ja jos teho on negatiivinen, osaa pilotin metodit muuttaa tehon positiiviseksi, mutta pyörimissuunnan taaksepäin.
 
-* Esteen kierto alkaa, kun ultraäänisensori havaitsee kohteen radalla. Robotti ensin pysäyttää itsensä kutsumalla `pysaytaRobootti()`-metodia jonka jälkeen pilotti resetoi moottorien takometrit ettei `Pilotti.java`-luokan sisällä oleva `DifferentialPilot`-olion ilmentymä menisi sekaisin. Metodi `etsiEsteenReunatJaKierra()` taas suorittaa itse väistö-operaation, jossa robotti aluksi kääntyy n. 20cm päässä esteestä oikealle ja kääntää ultraäänisensorin kohti estettä. Tämän jälkeen robotti etenee viistosti esteen etureunaa pitkin pilottia käskyttäen, kunnes saapuu esteen kulmalle. Kulmalle saapuessaan robotti vielä liikuttaa itseään pituutensa verran eteenpäin ja kutsuu pilotin metodia `kaannyVasemmalle(90)`. Tämä metodikutsu (kuten edellä mainitut liikkumisetkin esteen väistössä) kohdistuvat pilotin sisällä olevalle `DifferentialPilot`-olion ilmentymälle, joka saa aikaan synkronoidun liikkumisen moottorien välillä (mahdollistaa suoraan menemisen mahdollisimman tarkasti). Robotti suorittaa samanlaisen liikesarjan seuraavaksi metodin `kuljeEsteenOhiSivulta()`, kunnes saapuu viimeiselle reunalle esteellä. Tällöin robotti kääntyy 45 astetta vasemmalle pilotin avulla ja alkaa kulkemaan suoraan kunnes metodi `kuljeEteenKunnesLukijanArvoAlle(40)` havaitsee alle 40 lukeman valosensorilta (eli viivalukeman) ja pysäyttää robotin. Lopuksi vielä palautetaan nakijan boolean parametri `onkoLoydetty` takaisin falseksi, asetetaan pilotin avulla moottorien tehoiksi takaisin keskiteho ja vapautetaan pilotilla moottorit regulaatiosta. Näin päästään takaisin samaan tilanteeseen kuin metodin `haeMaxMinLukemat()` jälkeen alussa.
+* Esteen kierto alkaa, kun ultraäänisensori havaitsee kohteen radalla. Robotti ensin pysäyttää itsensä kutsumalla `pysaytaRobootti()`-metodia jonka jälkeen pilotti resetoi moottorien takometrit ettei `Pilotti.java`-luokan sisällä oleva `DifferentialPilot`-olion ilmentymä menisi sekaisin. Metodi `etsiEsteenReunatJaKierra()` taas suorittaa itse väistö-operaation, jossa robotti aluksi kääntyy n. 20cm päässä esteestä oikealle ja kääntää ultraäänisensorin kohti estettä. Tämän jälkeen robotti etenee viistosti esteen etureunaa pitkin pilottia käskyttäen, kunnes saapuu esteen kulmalle. Kulmalle saapuessaan robotti vielä liikuttaa itseään pituutensa verran eteenpäin ja kutsuu pilotin metodia `kaannyVasemmalle(90)`. Tämä metodikutsu (kuten edellä mainitut liikkumisetkin esteen väistössä) kohdistuvat pilotin sisällä olevalle `DifferentialPilot`-olion ilmentymälle, joka saa aikaan synkronoidun liikkumisen moottorien välillä (mahdollistaa suoraan menemisen mahdollisimman tarkasti). Robotti suorittaa samanlaisen liikesarjan seuraavaksi metodin `kuljeEsteenOhiSivulta()`, kunnes saapuu viimeiselle reunalle esteellä. Tällöin robotti kääntyy 45 astetta vasemmalle pilotin avulla ja alkaa kulkemaan suoraan kunnes metodi `kuljeEteenKunnesLukijanArvoAlle(40)` havaitsee alle 40 lukeman valosensorilta (eli viivalukeman) ja pysäyttää robotin. Lopuksi vielä palautetaan nakijan boolean parametri `onkoLoydetty` takaisin falseksi, asetetaan pilotin avulla moottorien tehoiksi takaisin keskiteho ja vapautetaan pilotilla moottorit regulaatiosta. Näin päästään takaisin samaan tilanteeseen kuin metodin `haeMaxMinLukemat()` jälkeen alussa ja viivan seuraaminen jatkuu taas.
 
-Robotin tekoäly olettaa, että esteet ovat n. neliön muotoisia ja hieman korkeampia, kuin robotti. Käännöksien asteet ovat 90 astetta ultraäänisensorille ja sivumoottoreille, kun estettä kierretään edestä ja sivulta. Viimeinen käännös esteen kierrossa on 45 astetta robotille ja 90 astetta ultraäänisensorille.
+Robotin tekoäly olettaa, että esteet ovat n. neliön muotoisia ja hieman korkeampia kuin robotti johtuen ultraäänisensorin rajoitteista. Käännöksien asteet ovat 90 astetta ultraäänisensorille ja sivumoottoreille, kun estettä kierretään edestä ja sivulta. Viimeinen käännös esteen kierrossa on 45 astetta robotille ja 90 astetta ultraäänisensorille.  Seurattavan teipin olisi hyvä olla mustaa teippiä esimerkiksi sähköteippiä ja alustan mahdollisimman vaalea verrattuna seurattavaan teippiin, jotta koodi robotin tekoäly toimii kaikista parhaiten.
 
 # Testaus
 
-- Omat metodit
-- omat luokat
-- omat testit käytännössä
+- **Yksikkötestit**
+  * Robotin PID-säädin on testattu toimivaksi muutamalla yksikkötestillä, jotka sijaitsevat `LogiikanTestaaja.java`-luokassa, muuten testit ovat käytännössä olleet käytännöllisiä testejä eli testejä, jotka testaavat robotin toimintaa kokonaisuutena oikeilla ajoilla.
+- **Käytännölliset testit:**
+  * Alempana muutama tärkeä rajatapaus testattuna. Käytännössä koko testausprosessi kokonaisuudessaan kattoi paljon erilaisia testejä, kuten esimerkiksi kymmeniä erilaisia kulmia väliltä 0 - 180 astetta, monia erilaisia esteitä kuten kulmikkaita ja epätasaisia, erilaisia esteiden välejä, ratojen suorien osuuksien pituuksia sekä radan muotoja.
 
-# Puutteet
+#####Testitapaus 1:
+
+![Kuva radasta](/pics/helppoRata.jpg)
+
+Tein kuvassa olevan radan robotille, missä haastavin kulma oli yli 90 astetta. Testin tarkoitus oli testata, että robotti pääsee radan oikealta vasemmalle, kun PID oli säädetty ja moottorien teho oli suurin mahdollinen suhteessa PID-säätimeen.
+
+Robottini onnistui testissä ja vielä erittäin nopeasti. Testi osoitti, että robotti osaa mennä rataa pitkin, jossa suurin kulma on yli 90 astetta.
+
+#####Testitapaus 2:
+
+![Kuva radasta2](/pics/vaikeaRata.jpg)
+Seuraava rata oli haastavampi. Robotti lähti radan oikeasti reunasta ja seurasi rataa nätisti, kunnes saapui viimeiseen käännökseen.
+
+Tämä käännös oli robotilleni liian tiukka, joten päätin kokeilla uudestaan muutaman kerran ja päädyin tulokseen, että robotti pääsi noin 4/10 kerroista mutkan läpi. En vetäisi johtopäätöstä, että robotti epäonnistui testin, mutta voin varmasti sanoa sen, että mutka oli robotille vaikea. Mutkan onnistumiseen vaikuttivat kulma, jossa robotti mutkaan tuli, robotin nopeus ja aivan varmasti myös robotin rakenne.
+
+#####Testitapaus 3:
+
+![Rata loopilla](/pics/esimerkkiRata.jpg)
+
+
+# Puutteet ja mahdolliset parannukset
+
+- robotti ei lopeta
+- rakenne
+- esteiden havaitseminen
+- tarkkuus
+
 
 # Käyttöohje
