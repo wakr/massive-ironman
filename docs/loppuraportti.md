@@ -24,11 +24,11 @@ Robotin rakenne mahdollistaa vakaan, mutta nopean liikkumisen. Vakaa rakenne par
 
 ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/robottiEdest%C3%A4.jpg?raw=true "Robotti edestä")
 
-![](/pics/robottiSivusta.jpg?raw=true "Robotti sivusta")
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/robottiSivusta.jpg?raw=true "Robotti sivusta")
 
-![Robotti alta](/pics/robottiAlta.jpg?raw=true "Robotti alta")
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/robottiAlta.jpg?raw=true "Robotti alta")
 
-![Robotti takaa](/pics/robottiTakaa.jpg?raw=true "Robotti takaa")
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/robottiTakaa.jpg?raw=true "Robotti takaa")
 
 
 # Koodin rakenne
@@ -73,7 +73,7 @@ Robotin tekoäly olettaa, että esteet ovat n. neliön muotoisia ja hieman korke
 
 #####Testitapaus 1:
 
-![Kuva radasta](/pics/helppoRata.jpg?raw=true)
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/helppoRata.jpg?raw=true "Helppo rata")
 
 Tein kuvassa olevan radan robotille, missä haastavin kulma oli yli 90 astetta. Testin tarkoitus oli testata, että robotti pääsee radan oikealta vasemmalle, kun PID oli säädetty ja moottorien teho oli suurin mahdollinen suhteessa PID-säätimeen.
 
@@ -81,7 +81,7 @@ Robottini onnistui testissä ja vielä erittäin nopeasti. Testi osoitti, että 
 
 #####Testitapaus 2:
 
-![Kuva radasta2](/pics/vaikeaRata.jpg)
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/vaikeaRata.jpg?raw=true)
 Seuraava rata oli haastavampi. Robotti lähti radan oikeasti reunasta ja seurasi rataa nätisti, kunnes saapui viimeiseen käännökseen.
 
 Tämä käännös oli robotilleni liian tiukka, joten päätin kokeilla uudestaan muutaman kerran ja päädyin tulokseen, että robotti pääsi noin 4/10 kerroista mutkan läpi. En vetäisi johtopäätöstä, että robotti epäonnistui testin, mutta voin varmasti sanoa sen, että mutka oli robotille vaikea. Mutkan onnistumiseen vaikuttivat kulma, jossa robotti mutkaan tuli, robotin nopeus ja aivan varmasti myös robotin rakenne.
