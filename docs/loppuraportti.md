@@ -22,9 +22,9 @@ Robotin rakenne mahdollistaa vakaan, mutta nopean liikkumisen. Vakaa rakenne par
 
 ### Kuvat
 
-![Robotti edestä](/pics/robottiEdestä.jpg?raw=true "Robotti edestä")
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/robottiEdest%C3%A4.jpg?raw=true "Robotti edestä")
 
-![Robotti sivusta](/pics/robottiSivusta.jpg?raw=true "Robotti sivusta")
+![](/pics/robottiSivusta.jpg?raw=true "Robotti sivusta")
 
 ![Robotti alta](/pics/robottiAlta.jpg?raw=true "Robotti alta")
 
