@@ -22,13 +22,13 @@ Robotin rakenne mahdollistaa vakaan, mutta nopean liikkumisen. Vakaa rakenne par
 
 ### Kuvat
 
-![Robotti edestä](/pics/robottiEdestä.jpg)
+![Robotti edestä](/pics/robottiEdestä.jpg?raw=true "Robotti edestä")
 
-![Robotti sivusta](/pics/robottiSivusta.jpg)
+![Robotti sivusta](/pics/robottiSivusta.jpg?raw=true "Robotti sivusta")
 
-![Robotti alta](/pics/robottiAlta.jpg)
+![Robotti alta](/pics/robottiAlta.jpg?raw=true "Robotti alta")
 
-![Robotti takaa](/pics/robottiTakaa.jpg)
+![Robotti takaa](/pics/robottiTakaa.jpg?raw=true "Robotti takaa")
 
 
 # Koodin rakenne
@@ -73,7 +73,7 @@ Robotin tekoäly olettaa, että esteet ovat n. neliön muotoisia ja hieman korke
 
 #####Testitapaus 1:
 
-![Kuva radasta](/pics/helppoRata.jpg)
+![Kuva radasta](/pics/helppoRata.jpg?raw=true)
 
 Tein kuvassa olevan radan robotille, missä haastavin kulma oli yli 90 astetta. Testin tarkoitus oli testata, että robotti pääsee radan oikealta vasemmalle, kun PID oli säädetty ja moottorien teho oli suurin mahdollinen suhteessa PID-säätimeen.
 
