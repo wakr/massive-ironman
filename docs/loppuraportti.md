@@ -88,7 +88,15 @@ Tämä käännös oli robotilleni liian tiukka, joten päätin kokeilla uudestaa
 
 #####Testitapaus 3:
 
-![Rata loopilla](/pics/esimerkkiRata.jpg)
+![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/esimerkkiRata.jpg?raw=true)
+
+Testasin robottia tällä kertaa radalla, jossa on kierros. Annoin robotin mennä rataa muutaman kerran ympäri ja kaikki toimi kuten pitikin. Lisäsin tämän jälkeen radan suoran osuuden keskelle esteen Fazerin konvehtirasiasta, joka osoitti radan suuntaan viistosti.
+
+Testi onnistui täydellisesti. Robotti kiersi esteen tarpeeksi kaukaa, kuten pitikin ja palasi takaisin radalle ja jatkoi lukemista, kunnes taas törmäsi esteeseen radalla. Väistämisen aikana etäisyys esteeseen kiertojen aikana muuttui hieman, mutta pysyi noin 10-20cm päästä esteestä jokaisella väistöllä.
+
+#####Testitapaus 4 (laajennosta 3.):
+
+
 
 
 # Puutteet ja mahdolliset parannukset
