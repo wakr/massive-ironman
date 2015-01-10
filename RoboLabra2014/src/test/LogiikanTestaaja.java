@@ -2,7 +2,7 @@ package test;
 
 import util.PID;
 
-// yksikkötestit
+// yksikkötestit, jotka palauttavat true onnistuessaan
 
 public class LogiikanTestaaja {
 

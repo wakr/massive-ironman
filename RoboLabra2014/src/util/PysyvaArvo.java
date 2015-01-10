@@ -11,10 +11,10 @@ public enum PysyvaArvo {
 	OffSet(100 / 2), // valolukijan virhemarginaalin tasoitus välille -50, 0 , 50
 
 	// kaikki arvot 100 kertaa suurempina
-	KonstatIntegraali(1),    // integraalin säätämiseen 12 
-	KonstantDerivaatta(10000),  // ennustaa korjattavaa virhemarginaalia 500 
-	KonstantProportional(190), // virheestä kääntymisen kulma 84
-	TargetPower(90); 		  // Robotin käyttämän moottorin tehokkuus 35
+	KonstatIntegraali(1),    // integraalin säätämiseen 
+	KonstantDerivaatta(10000),  // ennustaa korjattavaa virhemarginaalia  
+	KonstantProportional(190), // virheestä kääntymisen kulma 
+	TargetPower(90); 		  // Robotin käyttämän moottorin tehokkuus 
 
 	private int arvo;
 
