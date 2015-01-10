@@ -36,21 +36,21 @@ public class Robo {
 		int kaannos = pid.laskeKaantoSuhde(lukija.getLuettu());
 		int TP = PysyvaArvo.TargetPower.getArvo();
 		int vasenPower = TP - kaannos, oikeaPower = TP + kaannos;
-		
+
 		paataToiminta(vasenPower, oikeaPower);
 	}
 
 	private void vaistaEste() {
 		pysaytaRobootti();
 		pilotti.resetoiTachot();
-		
+
 		etsiEsteenReunatJaKierra();
-		
+
 		alustaValmiusLukemiseen();
 	}
 
     private void alustaValmiusLukemiseen(){
-        nakija.setLoydettyFalse();
+    nakija.setLoydettyFalse();
 		pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
 		pilotti.vapautaRegulaatioMolemmista();
     }
@@ -81,7 +81,7 @@ public class Robo {
 	}
 
 	private void kaannaRobottiJaLukijaSivuttainKohtiEstetta() {
-		pilotti.kaannyOikealle(90);						
+		pilotti.kaannyOikealle(90);
 		pilotti.kaannaNakijaaVasemmalle(90);
 	}
 
@@ -118,17 +118,17 @@ public class Robo {
 	}
 
 	private void pysaytaRobootti() {
-		
+
 		pilotti.asetaVoimatMolempiin(0);
 		pilotti.pysaytaMolemmat();
-			
+
 	}
 
 	private void paataToiminta(int vasenPower, int oikeaPower) {
-		
+
 		pilotti.asetaVoimaJaLiikutaEteenVasen(vasenPower);
 		pilotti.asetaVoimaJaLiikutaEteenOikea(oikeaPower);
-		
+
 	}
 
 	private void haeMaxMinLukemat() {
