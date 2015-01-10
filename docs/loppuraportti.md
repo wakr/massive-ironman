@@ -105,7 +105,7 @@ Testi osoitti, että kahden peräkkäisen esteen väli on oltava tarpeeksi suuri
 
 Tein testitapaus 3. radan uudestaan kahdella esteellä, mutta muokkasin hieman rataa tehden sen ylä- ja alaosasta symmetrisen. Laitoin robotin liikkeelle vasemmasta yläkulmasta ja robotti onnistui nyt väistämään kummatkin esteet. Annoin pyöriä robotin 5 kertaa rataa ympäri eikä virheitä esiintynyt.
 
-Robotti siis toimi hyvin radalla, jossa oli annettu tarpeeksi tilaa kääntymisille ja väistöille. Robotti myös väisti useaa estettä ajon aikana, joten voin testin perusteella sanoa, että robottini seuraa tehtyjä ratoja mallikkaasti väistäen sen eteen tulevia esteitä.
+Robotti siis toimi hyvin radalla, jossa oli annettu tarpeeksi tilaa kääntymisille ja väistöille. Robotti myös väisti useaa estettä ajon aikana, joten voin testin perusteella sanoa, että robottini seuraa syklisiä ratoja mallikkaasti väistäen sen eteen tulevia esteitä.
 
 Toteutettujen testien perusteella voin sanoa, että robottini toimii varmasti radalla, jonka suurin kulma on yli 90 astetta. Sitä alemmissa voi robotti nopeutensa ja koonsa takia eksyä radalta. Radan suunnittelussa on otettava huomioon myös robotin koko, jolloin kääntymisille on annettava tarpeeksi tilaa yli 90 asteen kulmissakin. Esteiden olisi hyvä sijaita suorilla osuuksilla, joissa robotilla on tarpeeksi tilaa tulla takasin radalle. Kahden esteen välinen etäisyys ei saa olla liian pieni ja nyrkkisääntönä voidaan pitää noin 2 x robotin pituuden väliä. Muodoltaan esteiden olisi hyvä olla kohtisuorassa rataa kohti ja korkeudeltaan sopivia sekä radan ympäristön mahdollisimman esteetön, jotta ultraäänisensori toimii kuten pitääkin.
 
@@ -115,11 +115,11 @@ Toteutettujen testien perusteella voin sanoa, että robottini toimii varmasti ra
 
 Robotin suurimpana puutteena voidaan pitää sen hieman rajoitettua toimintaympäristöä, jossa radan esteiden sijoittelun ei voi olla vapaa. Tämä ongelma esiintyy, kun robotti on väistänyt esteen ja lähtee 45 asteen kulmassa suoraan löytämättä rataa uudelleen.
 
-Robotin nopeus on sekä hyvä, että ongelmallinen asia. Suuri nopeus tarkoittaa epätarkkuutta tietyissä tilanteissa, jolloin robotti saattaa eksyä radalta. Toisaalta tasapainoilu nopeuden ja tarkkuuden välillä on vaikeaa.
+Robotin nopeus on sekä hyvä, että ongelmallinen asia. Suuri nopeus tarkoittaa epätarkkuutta tietyissä tilanteissa jolloin robotti saattaa eksyä radalta, mutta myös nopeaa radan selvittämistä. Toisaalta tasapainoilu nopeuden ja tarkkuuden välillä on vaikeaa.
 
 Robotti olettaa kiertävänsä esteen aina oikealta puolelta, joten vaikka este olisi lyhyempi kiertää vasemmalta, niin robotti ei ota tätä huomioon. Esteen kierrossa myös paluu 45 asteen kulmassa on ongelmallinen, koska jos esteen leveys olisi esimerkiksi yhden metrin, niin robotti joutuisi kulkemaan pitkän matkan etsiäkseen viivaa ja tämä heijastuisi myös radan suunnittelussa.
 
-Yksi ongelmista on myös robotin rakenteessa. Ultraäänisensorin korkeuden takia esteiden on oltava aina suhteellisen korkeita (n. 20cm), mutta rakenteessa eniten haittaavat etukelkat, jotka saattavat jäädä teippiin kiinni tai alustaan, jos ei se ole tarpeeksi tasainen.
+Yksi ongelmista on myös robotin rakenteessa. Ultraäänisensorin korkeuden takia esteiden on oltava aina suhteellisen korkeita (n. 20cm), mutta rakenteessa eniten haittaavat etukelkat, jotka saattavat jäädä teippiin kiinni tai alustaan, jos se ei ole tarpeeksi tasainen.
 
 Koodi ei lopeta robotin toimintaa, joten käyttäjän vastuulle jää Enter-painikkeen painaminen, kun hän haluaa, että robotti pysähtyy.
 
@@ -128,14 +128,25 @@ Robotti ei aina käänny tarvittavaa määrää, joten voi syntyä tilanteita v�
 Vaikka ongelmia ja puutteita on jonkin verran, on nämä suhteellisen helppoja korjata esimerkisi muuttamalla robotin rakennetta paremmaksi, muokkaamalla väistämisen logiikkaa ja parantelemalla koodin tarkkuuksia. Tulevaisuudessa robottini ultraäänisensori voisi olla paremmassa paikassa ja väistön logiikkaa muutettu niin, että robotti ei tee 45 asteen käännöstä lopuksi vaan etenee lopussakin esteen pintoja pitkin kunnes saapuu viivalle esteen viereen ja kääntyy oikealle kohti rataa. Robotti voisi myös tarkistaa aina, että se on kääntynyt tarvittavaan kulmaan, etteivät kulmat jäisi liian pitkiksi/lyhyiksi.
 
 
-
-
-
-
-
 # Käyttöohje
 
 Kun rata on valmis ja robotti on koottuna mittojen mukaan etene näin:
-1. a
-2. b
-3. c
+1. Kiinnitä robotti USB-piuhalla tietokoneeseen ja aja build.xml projektista.
+2. Irroita USB-johto ja etsi main-tiedosto robotista.
+3. Laita robotti ratasi alkuun ja mieluiten suoralle osuudelle, jotta automaattinen kalibrointi onnistuu.
+4. Aja ohjelma robotin kautta.
+5. Katso kun robottisi kiitää tekemäsi radan ympäri.
+
+Kun haluat pysäyttää robotin:
+1. Nosta robotti ilmaan.
+2. Paina Enter-painiketta
+
+# Rakennusohje
+
+1. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus1.jpg?raw=true)
+2. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus2.jpg?raw=true)
+3. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus3.jpg?raw=true)
+4. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus4.jpg?raw=true)
+5. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus5.jpg?raw=true)
+6. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus6.jpg?raw=true)
+7. ![](https://github.com/wakr/massive-ironman/blob/master/docs/pics/kasaus7.jpg?raw=true)
