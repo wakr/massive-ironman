@@ -50,7 +50,7 @@ public class Robo {
 	}
 
     private void alustaValmiusLukemiseen(){
-    nakija.setLoydettyFalse();
+    		nakija.setLoydettyFalse();
 		pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
 		pilotti.vapautaRegulaatioMolemmista();
     }
