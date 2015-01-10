@@ -130,15 +130,15 @@ Vaikka ongelmia ja puutteita on jonkin verran, on nämä suhteellisen helppoja k
 
 # Käyttöohje
 
-Kun rata on valmis ja robotti on koottuna mittojen mukaan etene näin:
-1. Kiinnitä robotti USB-piuhalla tietokoneeseen ja aja build.xml projektista.
-2. Irroita USB-johto ja etsi main-tiedosto robotista.
-3. Laita robotti ratasi alkuun ja mieluiten suoralle osuudelle, jotta automaattinen kalibrointi onnistuu.
-4. Aja ohjelma robotin kautta.
-5. Katso kun robottisi kiitää tekemäsi radan ympäri.
+Kun rata on valmis ja robotti on koottuna mittojen mukaan etene näin
+1. Kiinnitä robotti USB-piuhalla tietokoneeseen ja aja build.xml projektista
+2. Irroita USB-johto ja etsi main-tiedosto robotista
+3. Laita robotti ratasi alkuun ja mieluiten suoralle osuudelle, jotta automaattinen kalibrointi onnistuu
+4. Aja ohjelma robotin kautta
+5. Katso kun robottisi kiitää tekemäsi radan ympäri
 
 Kun haluat pysäyttää robotin:
-1. Nosta robotti ilmaan.
+1. Nosta robotti ilmaan
 2. Paina Enter-painiketta
 
 # Rakennusohje
