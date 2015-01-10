@@ -134,7 +134,7 @@ public class Robo {
 	private void haeMaxMinLukemat() {
 
 		pilotti.asetaVoimatMolempiin(30);	// 30 on tarpeeksi hidas, jotta saadaan vakaat tulokset
-		pilotti.etsiAlkuArvot(135, lukija); // 135 astetta
+		pilotti.etsiAlkuArvot(135, lukija); 	// 135 astetta
 		pilotti.pysaytaMolemmat();
 
 	}
