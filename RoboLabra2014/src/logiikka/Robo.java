@@ -45,15 +45,15 @@ public class Robo {
 		pilotti.resetoiTachot();
 
 		etsiEsteenReunatJaKierra();
-
+		
 		alustaValmiusLukemiseen();
 	}
 
-    private void alustaValmiusLukemiseen(){
+	private void alustaValmiusLukemiseen(){
     		nakija.setLoydettyFalse();
 		pilotti.asetaVoimatMolempiin(PysyvaArvo.TargetPower.getArvo());
 		pilotti.vapautaRegulaatioMolemmista();
-    }
+    	}
 
 	private void etsiEsteenReunatJaKierra() {
 		kaannyJaKuljeEsteenOhiEdestä();
