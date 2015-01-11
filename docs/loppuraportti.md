@@ -107,6 +107,13 @@ Tein testitapaus 3. radan uudestaan kahdella esteellä, mutta muokkasin hieman r
 
 Robotti siis toimi hyvin radalla, jossa oli annettu tarpeeksi tilaa kääntymisille ja väistöille. Robotti myös väisti useaa estettä ajon aikana, joten voin testin perusteella sanoa, että robottini seuraa syklisiä ratoja mallikkaasti väistäen sen eteen tulevia esteitä.
 
+#####Testitapaus 6
+
+Testailin erilaisia PID-säätimen arvoja ja tulin tuloksiini alla olevan taulukon kautta. Arvoilla P = 190, D = 10000, I = 1 sain robotin kulkemaan tasaisesti ja ketterästi radan lävitse. Arvot tosin riippuvat aina robotin rakenteesta, moottoreista ja ratojen profiileista.
+
+![](http://4.bp.blogspot.com/-6wNzTUebXFs/USH1_PZOUjI/AAAAAAAAAzU/__-uezlkoUA/s400/ZEIGLER.png)
+
+
 Toteutettujen testien perusteella voin sanoa, että robottini toimii varmasti radalla, jonka suurin kulma on yli 90 astetta. Sitä alemmissa voi robotti nopeutensa ja koonsa takia eksyä radalta. Radan suunnittelussa on otettava huomioon myös robotin koko, jolloin kääntymisille on annettava tarpeeksi tilaa yli 90 asteen kulmissakin. Esteiden olisi hyvä sijaita suorilla osuuksilla, joissa robotilla on tarpeeksi tilaa tulla takasin radalle. Kahden esteen välinen etäisyys ei saa olla liian pieni ja nyrkkisääntönä voidaan pitää noin 2 x robotin pituuden väliä. Muodoltaan esteiden olisi hyvä olla kohtisuorassa rataa kohti ja korkeudeltaan sopivia sekä radan ympäristön mahdollisimman esteetön, jotta ultraäänisensori toimii kuten pitääkin.
 
 
